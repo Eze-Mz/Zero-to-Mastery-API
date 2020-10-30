@@ -32,9 +32,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// app.get("/", (req, res) => {
-//   res.send();
-// });
+app.get("/", (req, res) => {
+  res.send("Its working");
+});
 
 app.post("/signin", (req, res) => {
   signIn.handleSignIn(req, res, db, bcrypt);
