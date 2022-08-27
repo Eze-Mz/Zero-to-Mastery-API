@@ -14,7 +14,7 @@ const db = knex({
   connection: {
     host: "127.0.0.1",
     user: "postgres",
-    password: "test",
+    password: "admin",
     database: "smartbrain",
   },
 });
@@ -42,7 +42,7 @@ app.post("/signin", (req, res) => {
 
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
-}); // DEPENDENCY INJECTION
+});
 
 app.get("/profile/:id", (req, res) => {
   profile.handleProfileGet(req, res, db);
@@ -56,9 +56,13 @@ app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`app is running on port ${process.env.PORT}`);
+app.listen(8080, () => {
+  console.log(`app is running on port 8080`);
 });
+
+/* app.listen(process.env.PORT, () => {
+  console.log(`app is running on port ${process.env.PORT}`);
+}); */
 
 /*
 / root route --> "this is working"
