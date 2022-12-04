@@ -9,7 +9,7 @@ const signIn = require("./controllers/signIn");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
 
-/* const db = knex({
+const db = knex({
   client: "pg",
   connection: {
     connectionString: process.env.DATABASE_URL,
@@ -17,7 +17,7 @@ const image = require("./controllers/image");
       rejectUnauthorized: false,
     },
   },
-}); */
+});
 
 /* const db = knex({
   client: "pg",
