@@ -15,6 +15,10 @@ const db = knex({
   debug: true
 });
 
+knex.raw('select 1+1 as result').then(function () {
+  console.log("succes!");
+});
+
 // use select with knex to de database
 // console.log(
 //   db
