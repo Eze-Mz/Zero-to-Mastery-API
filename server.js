@@ -11,23 +11,9 @@ const image = require("./controllers/image");
 
 const db = knex({
   client: "pg",
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
+  connection: "postgres://Eze-Mz:DvpNh2k9oRwW@ep-morning-bonus-681541.us-west-2.aws.neon.tech/neondb?ssl=true",
+  debug: true
 });
-
-/* const db = knex({
-  client: "pg",
-  connection: {
-    host: "127.0.0.1",
-    user: "postgres",
-    password: "admin",
-    database: "smartbrain",
-  },
-}); */
 
 // use select with knex to de database
 // console.log(
@@ -66,7 +52,7 @@ app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log(`app is running on port ${process.env.PORT}`);
 });
 

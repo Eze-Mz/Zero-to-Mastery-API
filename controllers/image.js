@@ -1,24 +1,31 @@
-/* const clarifai = require("clarifai");
-console.log(Clarifai); */
-/* const clarifai = require("clarifai");
-//give the key to the api to use it
-const app = new Clarifai.App({
-  apiKey: "58d9f76643344f48bda3282dae1b1519",
-}); */
+// Your PAT (Personal Access Token) can be found in the portal under Authentification
+const PAT = '42b0125977704ceaa544984ee3629980';
+// Specify the correct user_id/app_id pairings
+// Since you're making inferences outside your app's scope
+const USER_ID = 'h0u1oga6e5vp';
+const APP_ID = 'face-recognition';
+// Change these to whatever model and image URL you want to use
+const MODEL_ID = 'face-detection';
+const IMAGE_URL = 'https://samples.clarifai.com/metro-north.jpg';
 
 const { ClarifaiStub, grpc } = require("clarifai-nodejs-grpc");
 
 const stub = ClarifaiStub.grpc();
 
 const metadata = new grpc.Metadata();
-metadata.set("authorization", "Key 58d9f76643344f48bda3282dae1b1519");
+metadata.set("authorization", "Key " + PAT);
 
 const handleApiCall = (req, res) => {
   stub.PostModelOutputs(
     {
-      // This is the model ID of a publicly available General model. You may use any other public or custom model ID.
-      model_id: "a403429f2ddf4b49b307e318f00e528b",
-      inputs: [{ data: { image: { url: req.body.input } } }],
+      user_app_id: {
+        "user_id": USER_ID,
+        "app_id": APP_ID
+      },
+      model_id: MODEL_ID,
+      inputs: [
+        { data: { image: { url: req.body.input } } }
+      ]
     },
     metadata,
     (err, response) => {
@@ -30,9 +37,9 @@ const handleApiCall = (req, res) => {
       if (response.status.code !== 10000) {
         console.log(
           "Received failed status: " +
-            response.status.description +
-            "\n" +
-            response.status.details
+          response.status.description +
+          "\n" +
+          response.status.details
         );
         return;
       }
@@ -41,12 +48,6 @@ const handleApiCall = (req, res) => {
     }
   );
 
-  /*   app.models
-    .predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => res.status(400).json("unable to work with api")); */
 };
 
 const handleImage = (req, res, db) => {
