@@ -11,7 +11,7 @@ const image = require("./controllers/image");
 
 const db = knex({
   client: "pg",
-  connection: "postgres://Eze-Mz:DvpNh2k9oRwW@ep-morning-bonus-681541.us-west-2.aws.neon.tech/neondb?ssl=true",
+  connection: process.env.DB_CONNECTION,
   debug: true
 });
 
